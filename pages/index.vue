@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1>Cloud Developer Advocate Speaking</h1>
+    <h1>Pollution Visualizer</h1>
     <h3>Lab Web</h3>
     <div class="tablecontain">
       <p class="mobiletext">You can scroll right to view the rest of the table, but it's easier to read on wider screens</p>

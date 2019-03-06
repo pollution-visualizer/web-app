@@ -24,6 +24,7 @@ export default {
     teamsArr() {
       //create it as an object first because that's more efficient than an array
       var endUnit = {};
+      
 
       this.filteredData.forEach(function(index) {
         //we'll need to get the year from the end of the string
@@ -36,15 +37,10 @@ export default {
         if (lat === undefined || long === undefined) return;
 
         if (val in endUnit) {
-          //if we already have this location (stored together as key) let's increment it
-          if (key in endUnit[val]) {
-            endUnit[val][key][2] += magBase;
-          } else {
-            endUnit[val][key] = [lat, long, magBase];
-          }
+            endUnit[val][key] = [lat, long, index.Waste/10000000];
         } else {
           let y = {};
-          y[key] = [lat, long, magBase];
+          y[key] = [lat, long, index.Waste/10000000];
           endUnit[val] = y;
         }
       });
