@@ -6,6 +6,7 @@
   "author": "Monserrat Genereux",
   "private": true,
   "scripts": {
+    "start": "npm run dev",
     "dev": "nuxt",
     "build": "nuxt build",
     "generate": "nuxt generate",
