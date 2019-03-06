@@ -2,6 +2,10 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  server: {
+    port: process.env.PORT || 5000, // default: 3000
+    host: '0.0.0.0', // default: localhost
+  },
   head: {
     title: 'Proyecto Lab Web',
     meta: [
@@ -35,10 +39,5 @@ module.exports = {
   /*
   ** Build configuration
   */
-  build: {},
-
-  server: {
-    port: process.env.PORT, // default: 3000
-    host: '0.0.0.0', // default: localhost
-  },
+  build: {}
 };
