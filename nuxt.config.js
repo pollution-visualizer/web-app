@@ -35,5 +35,10 @@ module.exports = {
   /*
   ** Build configuration
   */
-  build: {}
+  build: {},
+
+  server: {
+    port: process.env.PORT, // default: 3000
+    host: '0.0.0.0', // default: localhost
+  },
 };
