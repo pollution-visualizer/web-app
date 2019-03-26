@@ -37,10 +37,10 @@ export default {
         if (lat === undefined || long === undefined) return;
 
         if (val in endUnit) {
-            endUnit[val][key] = [lat, long, index.Norm];
+            endUnit[val][key] = [lat, long, index.Norm*2];
         } else {
           let y = {};
-          y[key] = [lat, long, index.Norm];
+          y[key] = [lat, long, index.Norm*2];
           endUnit[val] = y;
         }
       });
