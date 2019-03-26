@@ -2,6 +2,11 @@
   <section>
     <h1>Pollution Visualizer</h1>
     <h3>Lab Web</h3>
+    <br>
+      <button type="button" name="button" :value="CO2" v-model="pollution" @click="data='Plastic'">Plastic</button>
+      <div class="divider"/>
+      <button type="button" name="button" :value="CO22" v-model="pollution" @click="data='CO2'">CO2</button>
+      <br>
     <div class="tablecontain">
       <p class="mobiletext">You can scroll right to view the rest of the table, but it's easier to read on wider screens</p>
       <label for="filterLabel">Filter By</label>
@@ -14,8 +19,6 @@
         <label for="filterText" class="hidden">{{ selectedFilter }}</label>
         <input id="filteredText" type="text" name="textfield" v-model="filteredText"></input>
       </span>
-      <button type="button" name="button" :value="CO2" v-model="pollution" @click="data='CO2'">CO2</button>
-      <button type="button" name="button" :value="CO22" v-model="pollution" @click="data='CO22'">CO22</button>
       <speaking-table :filteredData="filteredData"></speaking-table>
     </div>
     <more-info></more-info>
@@ -49,7 +52,7 @@ export default {
       option1: true,
       speakerData,
       speakerData2,
-      pollution: "CO2",
+      pollution: "Plastic",
     }
   },
   methods: {
@@ -75,7 +78,7 @@ export default {
     data: {
     // getter
     get: function () {
-        if(this.pollution == 'CO22'){
+        if(this.pollution == 'CO2'){
           return this.speakerData2;
         } else {
           return this.speakerData;
@@ -83,12 +86,12 @@ export default {
     },
     // setter
     set: function (newValue) {
-      if(newValue == "CO22"){
-        this.pollution = "CO22";
+      if(newValue == "CO2"){
+        this.pollution = "CO2";
         this.$store.state.data = this.speakerData2;
         this.foreRerender();
       }else {
-        this.pollution = "CO2";
+        this.pollution = "Plastic";
         this.$store.state.data = this.speakerData;
         this.foreRerender();
       }
@@ -176,6 +179,22 @@ input[type="text"] {
 
 .tablecontain {
   margin: 50px 0 0 0;
+}
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+
+button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  color: white;
+  background-color:#121212;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 @media (max-width: 800px) {
