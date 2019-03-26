@@ -14,17 +14,26 @@
         <label for="filterText" class="hidden">{{ selectedFilter }}</label>
         <input id="filteredText" type="text" name="textfield" v-model="filteredText"></input>
       </span>
+      <button type="button" name="button" :value="CO2" v-model="pollution" @click="data='CO2'">CO2</button>
+      <button type="button" name="button" :value="CO22" v-model="pollution" @click="data='CO22'">CO22</button>
       <speaking-table :filteredData="filteredData"></speaking-table>
     </div>
     <more-info></more-info>
-    <speaking-globe :filteredData="filteredData"></speaking-globe>
+    <speaking-globe :filteredData="filteredData" v-if="option1 == true"></speaking-globe>
   </section>
 </template>
 
 <script>
+
+import axios from 'axios'
 import SpeakingGlobe from '~/components/SpeakingGlobe.vue'
 import SpeakingTable from '~/components/SpeakingTable.vue'
 import MoreInfo from '~/components/MoreInfo.vue'
+import speakerData from './../assets/data.json';
+import speakerData2 from './../assets/data2.json';
+
+var dataURL = 'https://salty-shelf-74567.herokuapp.com/';
+
 
 export default {
   components: {
@@ -35,20 +44,63 @@ export default {
   data() {
     return {
       filteredText: '',
-      selectedFilter: ''
+      selectedFilter: '',
+      jsonData: [],
+      option1: true,
+      speakerData,
+      speakerData2,
+      pollution: "CO2",
     }
   },
+  methods: {
+    foreRerender(){
+      // Remove my-component from the DOM
+      this.option1 = false;
+      
+      this.$nextTick().then(() => {
+          // Add the component back in
+          this.option1 = true;
+        });
+    }
+  },
+  mounted(){
+    self = this;
+    axios
+      .get(dataURL)
+      .then(response => {this.jsonData = response})
+      .catch(error => {console.error(error)})
+      .finally(() => console.log(self.jsonData))
+  },
   computed: {
-    speakerData() {
-      return this.$store.state.speakerData;
+    data: {
+    // getter
+    get: function () {
+        if(this.pollution == 'CO22'){
+          return this.speakerData2;
+        } else {
+          return this.speakerData;
+        }
     },
+    // setter
+    set: function (newValue) {
+      if(newValue == "CO22"){
+        this.pollution = "CO22";
+        this.$store.state.data = this.speakerData2;
+        this.foreRerender();
+      }else {
+        this.pollution = "CO2";
+        this.$store.state.data = this.speakerData;
+        this.foreRerender();
+      }
+    }
+  },
     columns() {
       return this.$store.state.speakingColumns;
     },
     filteredData() {
       const x = this.selectedFilter,
         filter = new RegExp(this.filteredText, 'i')
-      return this.speakerData.filter(el => {
+      return this.data.filter(el => {
         if (el[x] !== undefined) { return el[x].match(filter) }
         else return true;
       })

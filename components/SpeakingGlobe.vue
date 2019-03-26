@@ -17,9 +17,9 @@ export default {
     },
   },
   computed: {
-    speakerData() {
+    data() {
       // we're getting this data from the vuex store, so it's best as a computed value
-      return this.$store.state.speakerData;
+      return this.$store.state.data;
     },
     teamsArr() {
       //create it as an object first because that's more efficient than an array
@@ -37,10 +37,10 @@ export default {
         if (lat === undefined || long === undefined) return;
 
         if (val in endUnit) {
-            endUnit[val][key] = [lat, long, index.Waste/10000000];
+            endUnit[val][key] = [lat, long, index.Norm];
         } else {
           let y = {};
-          y[key] = [lat, long, index.Waste/10000000];
+          y[key] = [lat, long, index.Norm];
           endUnit[val] = y;
         }
       });

@@ -1,11 +1,12 @@
 import Vuex from 'vuex';
-import speakerData from './../assets/pollution.json';
+import speakerData from './../assets/data.json';
+var data = speakerData;
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      speakingColumns: ['Country', 'Waste'],
-      speakerData
+      speakingColumns: ['Country', 'Year', 'Waste'],
+      data,
     }
   });
 };
