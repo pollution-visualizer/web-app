@@ -12,7 +12,7 @@ export const createGlobe = {
           opts.colorFn ||
           function(x) {
             let c = new THREE.Color();
-            c.setHSL(0.91 - x * 0.25, 1.0, 0.5);
+            c.setHSL(0.5 - x * 0.75, 1.0, 0.5);
             return c;
           };
 
@@ -125,7 +125,7 @@ export const createGlobe = {
           mesh.scale.set(1.1, 1.1, 1.1);
           scene.add(mesh);
 
-          geometry = new THREE.BoxGeometry(0.75, 0.75, 1);
+          geometry = new THREE.BoxGeometry(3, 3, 1);
           geometry.applyMatrix(new THREE.Matrix4().makeTranslation(0, 0, -0.5));
 
           point = new THREE.Mesh(geometry);

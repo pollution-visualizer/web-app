@@ -1,7 +1,12 @@
 <template>
   <section>
-    <h1>Cloud Developer Advocate Speaking</h1>
+    <h1>Pollution Visualizer</h1>
     <h3>Lab Web</h3>
+    <br>
+      <button type="button" name="button" @click="data='Plastic'">Plastic</button>
+      <div class="divider"/>
+      <button type="button" name="button" @click="data='Water'">Water</button>
+      <br>
     <div class="tablecontain">
       <p class="mobiletext">You can scroll right to view the rest of the table, but it's easier to read on wider screens</p>
       <label for="filterLabel">Filter By</label>
@@ -17,14 +22,20 @@
       <speaking-table :filteredData="filteredData"></speaking-table>
     </div>
     <more-info></more-info>
-    <speaking-globe :filteredData="filteredData"></speaking-globe>
+    <speaking-globe :filteredData="filteredData" v-if="option1 == true"></speaking-globe>
   </section>
 </template>
 
 <script>
+
+import axios from 'axios'
 import SpeakingGlobe from '~/components/SpeakingGlobe.vue'
 import SpeakingTable from '~/components/SpeakingTable.vue'
 import MoreInfo from '~/components/MoreInfo.vue'
+//import { mapState } from 'vuex'
+
+var dataURL = 'https://salty-shelf-74567.herokuapp.com/';
+
 
 export default {
   components: {
@@ -35,20 +46,52 @@ export default {
   data() {
     return {
       filteredText: '',
-      selectedFilter: ''
+      selectedFilter: '',
+      jsonData: [],
+      option1: true,
+      pollutionVal: "Plastic",
     }
   },
+  methods: {
+    foreRerender(){
+      // Remove my-component from the DOM
+      this.option1 = false;
+      
+      this.$nextTick().then(() => {
+          // Add the component back in
+          this.option1 = true;
+        });
+    }
+  },
+  mounted(){
+    //this.$store.dispatch('loadData')
+  },
   computed: {
-    speakerData() {
-      return this.$store.state.speakerData;
+    data: {
+    // getter
+    get: function () {
+        return this.$store.state.data;
     },
+    // setter
+    set: function (newValue) {
+      if(newValue == "Water"){
+        this.pollutionVal = "Water";
+        this.$store.state.data = this.$store.state.pollution[1].DataSet;
+        this.foreRerender();
+      }else {
+        this.pollutionVal = "Plastic";
+        this.$store.state.data = this.$store.state.pollution[0].DataSet;
+        this.foreRerender();
+      }
+    }
+  },
     columns() {
       return this.$store.state.speakingColumns;
     },
     filteredData() {
       const x = this.selectedFilter,
         filter = new RegExp(this.filteredText, 'i')
-      return this.speakerData.filter(el => {
+      return this.data.filter(el => {
         if (el[x] !== undefined) { return el[x].match(filter) }
         else return true;
       })
@@ -124,6 +167,22 @@ input[type="text"] {
 
 .tablecontain {
   margin: 50px 0 0 0;
+}
+
+.divider{
+    width:5px;
+    height:auto;
+    display:inline-block;
+}
+
+button {
+  padding: 10px 20px;
+  border: 1px solid #ddd;
+  color: white;
+  background-color:#121212;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 @media (max-width: 800px) {

@@ -17,13 +17,14 @@ export default {
     },
   },
   computed: {
-    speakerData() {
+    data() {
       // we're getting this data from the vuex store, so it's best as a computed value
-      return this.$store.state.speakerData;
+      return this.$store.state.data;
     },
     teamsArr() {
       //create it as an object first because that's more efficient than an array
       var endUnit = {};
+      
 
       this.filteredData.forEach(function(index) {
         //we'll need to get the year from the end of the string
@@ -31,20 +32,18 @@ export default {
           long = index.Longitude,
           key = lat + ", " + long,
           magBase = 0.1,
-          val = 'Microsoft CDAs';
+          val = 'Microsoft CDAs',
+          factor = 0.60;
+        
+        if(index.Waste > 200){factor = 2}
 
         if (lat === undefined || long === undefined) return;
 
         if (val in endUnit) {
-          //if we already have this location (stored together as key) let's increment it
-          if (key in endUnit[val]) {
-            endUnit[val][key][2] += magBase;
-          } else {
-            endUnit[val][key] = [lat, long, magBase];
-          }
+            endUnit[val][key] = [lat, long, index.Norm*factor];
         } else {
           let y = {};
-          y[key] = [lat, long, magBase];
+          y[key] = [lat, long, index.Norm*factor];
           endUnit[val] = y;
         }
       });
@@ -90,7 +89,7 @@ body {
 @media (max-width: 800px) {
   #container {
     width: 100%;
-    height: 40%;
+    height: 50%;
     position: absolute;
     left: 40px;
     top: 150px;

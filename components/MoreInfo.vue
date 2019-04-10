@@ -1,6 +1,7 @@
 <template>
   <div class="more-info-contain">
-    <a href="https://css-tricks.com/exploring-data-with-serverless-and-vue-part-i" target="_blank">
+    <a href="https://github.com/pollution-visualizer" target="_blank">
+    <!--<a href="https://css-tricks.com/exploring-data-with-serverless-and-vue-part-i" target="_blank">-->
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="more-info" aria-labelledby="title" role="presentation" @mouseenter="show = !show" @mouseleave="show = !show">
         <title id="title">Question Mark Icon</title>
         <g class="questionpath">
