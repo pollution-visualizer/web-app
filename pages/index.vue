@@ -3,9 +3,9 @@
     <h1>Pollution Visualizer</h1>
     <h3>Lab Web</h3>
     <br>
-      <button type="button" name="button" :value="CO2" v-model="pollution" @click="data='Plastic'">Plastic</button>
+      <button type="button" name="button" @click="data='Plastic'">Plastic</button>
       <div class="divider"/>
-      <button type="button" name="button" :value="CO22" v-model="pollution" @click="data='CO2'">CO2</button>
+      <button type="button" name="button" @click="data='Water'">Water</button>
       <br>
     <div class="tablecontain">
       <p class="mobiletext">You can scroll right to view the rest of the table, but it's easier to read on wider screens</p>
@@ -32,8 +32,7 @@ import axios from 'axios'
 import SpeakingGlobe from '~/components/SpeakingGlobe.vue'
 import SpeakingTable from '~/components/SpeakingTable.vue'
 import MoreInfo from '~/components/MoreInfo.vue'
-import speakerData from './../assets/data.json';
-import speakerData2 from './../assets/data2.json';
+//import { mapState } from 'vuex'
 
 var dataURL = 'https://salty-shelf-74567.herokuapp.com/';
 
@@ -50,9 +49,7 @@ export default {
       selectedFilter: '',
       jsonData: [],
       option1: true,
-      speakerData,
-      speakerData2,
-      pollution: "Plastic",
+      pollutionVal: "Plastic",
     }
   },
   methods: {
@@ -67,32 +64,23 @@ export default {
     }
   },
   mounted(){
-    self = this;
-    axios
-      .get(dataURL)
-      .then(response => {this.jsonData = response})
-      .catch(error => {console.error(error)})
-      .finally(() => console.log(self.jsonData))
+    //this.$store.dispatch('loadData')
   },
   computed: {
     data: {
     // getter
     get: function () {
-        if(this.pollution == 'CO2'){
-          return this.speakerData2;
-        } else {
-          return this.speakerData;
-        }
+        return this.$store.state.data;
     },
     // setter
     set: function (newValue) {
-      if(newValue == "CO2"){
-        this.pollution = "CO2";
-        this.$store.state.data = this.speakerData2;
+      if(newValue == "Water"){
+        this.pollutionVal = "Water";
+        this.$store.state.data = this.$store.state.pollution[1].DataSet;
         this.foreRerender();
       }else {
-        this.pollution = "Plastic";
-        this.$store.state.data = this.speakerData;
+        this.pollutionVal = "Plastic";
+        this.$store.state.data = this.$store.state.pollution[0].DataSet;
         this.foreRerender();
       }
     }

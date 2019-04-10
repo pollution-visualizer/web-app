@@ -32,15 +32,18 @@ export default {
           long = index.Longitude,
           key = lat + ", " + long,
           magBase = 0.1,
-          val = 'Microsoft CDAs';
+          val = 'Microsoft CDAs',
+          factor = 0.60;
+        
+        if(index.Waste > 200){factor = 2}
 
         if (lat === undefined || long === undefined) return;
 
         if (val in endUnit) {
-            endUnit[val][key] = [lat, long, index.Norm*2];
+            endUnit[val][key] = [lat, long, index.Norm*factor];
         } else {
           let y = {};
-          y[key] = [lat, long, index.Norm*2];
+          y[key] = [lat, long, index.Norm*factor];
           endUnit[val] = y;
         }
       });
@@ -86,7 +89,7 @@ body {
 @media (max-width: 800px) {
   #container {
     width: 100%;
-    height: 40%;
+    height: 50%;
     position: absolute;
     left: 40px;
     top: 150px;
