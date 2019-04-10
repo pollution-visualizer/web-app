@@ -1,8 +1,7 @@
 {
   "name": "cda-locale",
   "version": "1.0.0",
-  "description":
-    "Proyecto Final de Lab Web",
+  "description": "Proyecto Final de Lab Web",
   "author": "Monserrat Genereux",
   "private": true,
   "scripts": {
@@ -15,6 +14,7 @@
   },
   "dependencies": {
     "autoprefixer": "^7.1.4",
+    "axios": "^0.18.0",
     "babel-preset-env": "^1.6.0",
     "nuxt": "^1.0.0-rc8",
     "pug": "^2.0.0-rc.4",
