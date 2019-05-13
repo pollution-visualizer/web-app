@@ -9,8 +9,9 @@
 
 <script>
 import axios from 'axios';
-//import solid from 'solid-auth-client';
-//const auth = require('solid-auth-client')
+const solid = require('solid-auth-client').solid
+const auth = require('solid-auth-client').auth
+
 
 export default {
   data:()=>{
@@ -22,24 +23,21 @@ export default {
   methods:{
     async popupLogin(){
       let vm = this;
-      vm.webId = "user"
-      vm.loggedIn = true;
-      /*
       let session = await solid.auth.currentSession();
-      let popupUri = 'https://solid.community/common/popup.html';
+      let popupUri = 'https://solid.github.io/solid-auth-client/dist/popup.html';
       if (!session){
         session = await solid.auth.popupLogin({ popupUri });
         alert(`Logged in as ${session.webId}`);
         vm.webId = session.webId
         vm.loggedIn = true;
       }
-      */
+
     }, 
     async popupLogOut(){
         let vm = this;
         vm.webId = ""
         vm.loggedIn = false;
-        //solid.auth.logout().then(() => alert('Goodbye!'));
+        solid.auth.logout().then(() => alert('Goodbye!'));
   },
   created(){
     let vm = this;
