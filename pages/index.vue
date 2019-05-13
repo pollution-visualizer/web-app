@@ -1,5 +1,6 @@
 <template>
   <section>
+    <login></login>
     <h1>Pollution Visualizer</h1>
     <h3>Lab Web</h3>
     <br>
@@ -32,6 +33,7 @@ import axios from 'axios'
 import SpeakingGlobe from '~/components/SpeakingGlobe.vue'
 import SpeakingTable from '~/components/SpeakingTable.vue'
 import MoreInfo from '~/components/MoreInfo.vue'
+import Login from '~/components/Login.vue'
 //import { mapState } from 'vuex'
 
 var dataURL = 'https://salty-shelf-74567.herokuapp.com/';
@@ -42,6 +44,7 @@ export default {
     SpeakingGlobe,
     SpeakingTable,
     MoreInfo,
+    Login,
   },
   data() {
     return {
