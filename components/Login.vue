@@ -9,8 +9,8 @@
 
 <script>
 import axios from 'axios';
-const solid = require('solid-auth-client').solid
-const auth = require('solid-auth-client').auth
+const auth = require('solid-auth-client')
+let solid = { auth }
 
 
 export default {
