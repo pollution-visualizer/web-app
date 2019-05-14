@@ -27,8 +27,11 @@ export default {
       let popupUri = 'https://solid.github.io/solid-auth-client/dist/popup.html';
       if (!session){
         session = await solid.auth.popupLogin({ popupUri });
-        alert(`Logged in as ${session.webId}`);
-        vm.webId = session.webId
+        console.log(session);
+        var webIdUri = ""+session.webId;
+        var nohttps = webIdUri.substring(webIdUri.indexOf("://")+3);
+        var username = nohttps.substring(0, nohttps.indexOf(".solid"));
+        vm.webId = username;
         vm.loggedIn = true;
       }
 
@@ -37,7 +40,7 @@ export default {
         let vm = this;
         vm.webId = ""
         vm.loggedIn = false;
-        solid.auth.logout().then(() => alert('Goodbye!'));
+        solid.auth.logout();
   },
   created(){
     let vm = this;
