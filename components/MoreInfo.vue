@@ -32,11 +32,11 @@ export default {
   color: white;
   position: absolute;
   top: 5px;
-  right: 40px;
+  left: 10px;
   width: 300px;
   height: 50px;
   z-index: 4000;
-  text-align: right;
+  text-align: left;
 }
 
 @media (max-width: 800px) {
@@ -58,7 +58,7 @@ export default {
 .more-info-contain {
   position: absolute;
   top: 40px;
-  right: 40px;
+  left: 285px;
 }
 
 .more-info {

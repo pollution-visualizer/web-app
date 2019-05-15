@@ -13,11 +13,16 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@trust/jose": "^0.4.0",
+    "@trust/oidc-rp": "^0.6.0",
     "autoprefixer": "^7.1.4",
     "axios": "^0.18.0",
     "babel-preset-env": "^1.6.0",
+    "fs": "0.0.1-security",
     "nuxt": "^1.0.0-rc8",
     "pug": "^2.0.0-rc.4",
+    "rdflib": "^0.20.1",
+    "solid-auth-client": "^2.3.0",
     "three": "^0.87.1",
     "vuex": "^2.4.0"
   },
